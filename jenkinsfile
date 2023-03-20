@@ -1,15 +1,17 @@
 pipeline{
     agent any
-    tools {maven "maven"}
+    tools {
+      maven "maven"
+      }
     stages {
-        stage('clone git') {
+        stage('Build maven project') {
           steps{
-            git branch: 'main', credentialsId: '1f5c4567-1fca-4363-a64c-dfe36313a2e7', url: 'https://github.com/nagadurga8/spring-petclinic.git' 
+            sh 'mvn clean install package' 
           }
         }
-          stage('Build') {
+          stage('Test') {
               steps {
-                  sh 'mvn clean package'
+                  echo 'testing......'
                   
               }
           }
