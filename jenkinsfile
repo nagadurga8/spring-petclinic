@@ -1,37 +1,17 @@
 pipeline{
     agent any
-    tools {
-      maven "maven"
-      }
+    tools {maven "maven"}
     stages {
-        stage('Build maven project') {
+        stage('clone git') {
           steps{
-            sh 'mvn clean install package' 
+            git branch: 'main', credentialsId: 'edc43311-5408-4645-8be5-df7162b7f887', url: 'https://github.com/nagadurga8/spring-petclinic.git'
           }
         }
-          stage('Test') {
+          stage('Build') {
               steps {
-                  echo 'testing......'
+                  sh 'mvn clean package'
                   
               }
           }
-          stage('SonarQube Analysis') {
-          def scannerHome = tool 'sonarqube-scanner'
-            withSonarQubeEnv('sonarqube') {
-              sh """/var/lib/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/sonarqube-scanner/bin/sonar-scanner \
-     -D sonar.projectVersion=1.0-SNAPSHOT \
-       -D sonar.login=admin \
-      -D sonar.password=Naga@308 \
-      -D sonar.projectBaseDir=/var/lib/jenkins/workspace/newpipeline/ \
-        -D sonar.projectKey=spring-petclinic \
-        -D sonar.sourceEncoding=UTF-8 \
-        -D sonar.language=java \
-        -D sonar.sources=spring-petclinic/src/main \
-        -D sonar.tests=spring-petclinic/src/test \
-        -D sonar.host.url=http://52.73.254.246:9000/"""
-            }
-          }
-        }
-      
-
     }
+}
