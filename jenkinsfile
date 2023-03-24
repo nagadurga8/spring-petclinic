@@ -22,5 +22,23 @@ pipeline{
               }
             }
           }
+          stage('upload jar to nexus'){
+            steps{
+              nexusArtifactUploader artifacts: [
+                [
+                  artifactId: 'spring-petclinic', 
+                  classifier: '', file: 'target/spring-petclinic-3.0.0-SNAPSHOT.jar', 
+                  type: 'jar'
+                ]
+              ], 
+              credentialsId: 'neuxs', 
+              groupId: 'org.springframework.samples', 
+              nexusUrl: 'http://54.167.105.114:8081', 
+              nexusVersion: 'nexus3', 
+              protocol: 'http', 
+              repository: 'simpleapp-release', 
+              version: '3.0.0-SNAPSHOT'
+            }
+          }
     }
 }
