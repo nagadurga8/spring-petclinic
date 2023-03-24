@@ -33,7 +33,7 @@ pipeline{
               ], 
               credentialsId: 'neuxs', 
               groupId: 'org.springframework.samples', 
-              nexusUrl: 'http://54.167.105.114:8081', 
+              nexusUrl: "nexus-3:8081", 
               nexusVersion: 'nexus3', 
               protocol: 'http', 
               repository: 'simpleapp-release', 
