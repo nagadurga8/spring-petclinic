@@ -30,14 +30,14 @@ pipeline{
               
               nexusArtifactUploader artifacts: [
                 [
-                  artifactId: 'spring-petclinic', 
+                  artifactId: 'spring-boot-starter-parent', 
                   classifier: '', 
                   file: "target/spring-petclinic-${mavenPom.version}.jar", 
                   type: 'jar'
                 ]
               ], 
               credentialsId: 'neuxs', 
-              groupId: 'org.springframework.samples', 
+              groupId: '>org.springframework.boot', 
               nexusUrl: "54.167.105.114:8081", 
               nexusVersion: 'nexus3', 
               protocol: 'http', 
