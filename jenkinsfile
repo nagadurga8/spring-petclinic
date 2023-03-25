@@ -27,13 +27,13 @@ pipeline{
               nexusArtifactUploader artifacts: [
                 [
                   artifactId: 'spring-petclinic', 
-                  classifier: '', file: 'target/spring-petclinic-3.0.0-SNAPSHOT.jar', 
+                  classifier: '', file: '/var/lib/jenkins/workspace/newpipeline/target/spring-petclinic-3.0.0-SNAPSHOT.jar', 
                   type: 'jar'
                 ]
               ], 
               credentialsId: 'neuxs', 
               groupId: 'org.springframework.samples', 
-              nexusUrl: "54.167.105.114:8081/repository/simpleapp-release/", 
+              nexusUrl: "54.167.105.114", 
               nexusVersion: 'nexus3', 
               protocol: 'http', 
               repository: 'simpleapp-release', 
