@@ -1,6 +1,12 @@
 pipeline{
     agent any
     tools {maven "maven"}
+     environment {
+      RELEASE_REPO = 'petclinic'
+      NEXUS_IP = '54.172.183.221'
+      NEXUS_PORT ='8081'
+      NEUXS_LOGIN ='neuxs'
+     }
     stages {
         stage('clone git') {
           steps{
@@ -24,23 +30,24 @@ pipeline{
          // }
           stage('upload jar to nexus'){
             steps{
-              nexusArtifactUploader artifacts: [
-                [
-                  artifactId: 'spring-petclinic', 
-                  classifier: '', 
-                  file: '/var/lib/jenkins/workspace/newpipeline/target', 
-                  type: 'jar'
-                  ]
-                  ], 
-                  credentialsId: 'neuxs', 
-                  groupId: 'org.springframework.samples', 
-                  nexusUrl: '54.172.183.221:8081', 
-                  nexusVersion: 'nexus2', 
-                  protocol: 'http', 
-                  repository: 'simpleapp-release', 
-                  version: '3.0.0-SNAPSHOT'
-              
+              nexusArtifactUploader(
+               nexusVersion: 'nexus3',
+               protocol: 'http',
+               nexusUrl:"${NEXUS_IP}:${NEXUS_PORT}",              
+               groupId: 'org.springframework.samples',
+               version: "${env.BUILD_ID}-${env.BUILD_TIMESTAMP}",
+               repository:"${RELEASE_REPO}",
+               credentialsId: "${NEUXS_LOGIN}",
+               artifacts: [
+                 [artifactId: 'spring-petclinic',
+                  classifier: '',
+                  file: 'target/spring-petclinic-3.0.0-SNAPSHOT.jar',
+                  type: 'jar']
+               ]
+              )
             }
           }
+            
+          
     }
 }
