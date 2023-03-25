@@ -27,6 +27,7 @@ pipeline{
               script{
                 def mavenPom = readmavenPom file: 'pom.xml'
                 def nexusRepoName = mavenPom.version.endWith("SNAPSHOT") "simpleapp-snapshot" : "simpleapp-release"
+              }
               nexusArtifactUploader artifacts: [
                 [
                   artifactId: 'spring-petclinic', 
@@ -42,7 +43,7 @@ pipeline{
               protocol: 'http', 
               repository: 'simpleapp-release', 
               version: "${mavenPom.version}"
-              }
+              
             }
           }
     }
