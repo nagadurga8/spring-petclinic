@@ -24,26 +24,21 @@ pipeline{
          // }
           stage('upload jar to nexus'){
             steps{
-              script{
-                def mavenPom = readmavenPom file: 'pom.xml'
-                def nexusRepoName = mavenPom.version.endWith("SNAPSHOT") ? "petclinic-snapshot" : "simpleapp-release"
-              
               nexusArtifactUploader artifacts: [
                 [
-                  artifactId: 'spring-boot-starter-parent', 
+                  artifactId: 'spring-petclinic', 
                   classifier: '', 
-                  file: "target/spring-petclinic-${mavenPom.version}.jar", 
+                  file: '/var/lib/jenkins/workspace/newpipeline/target', 
                   type: 'jar'
-                ]
-              ], 
-              credentialsId: 'neuxs', 
-              groupId: '>org.springframework.boot', 
-              nexusUrl: "54.167.105.114:8081", 
-              nexusVersion: 'nexus3', 
-              protocol: 'http', 
-              repository: nexusRepoName, 
-              version: "${mavenPom.version}"
-              }
+                  ]
+                  ], 
+                  credentialsId: 'neuxs', 
+                  groupId: 'org.springframework.samples', 
+                  nexusUrl: '54.172.183.221:8081', 
+                  nexusVersion: 'nexus2', 
+                  protocol: 'http', 
+                  repository: 'simpleapp-release', 
+                  version: '3.0.0-SNAPSHOT'
               
             }
           }
