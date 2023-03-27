@@ -3,7 +3,7 @@ pipeline{
     tools {maven "maven"}
      environment {
       RELEASE_REPO = 'petclinic'
-      NEXUS_IP = '54.172.183.221'
+      NEXUS_IP = '54.224.88.102'
       NEXUS_PORT ='8081'
       NEUXS_LOGIN ='neuxs'
       DOCKERHUB_CREDENTIALS = credentials('docker-token')
