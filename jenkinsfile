@@ -6,6 +6,7 @@ pipeline{
       NEXUS_IP = '54.172.183.221'
       NEXUS_PORT ='8081'
       NEUXS_LOGIN ='neuxs'
+      DOCKERHUB_CREDENTIALS = credentials('docker-token')
      }
     stages {
         stage('clone git') {
@@ -45,6 +46,11 @@ pipeline{
                   type: 'jar']
                ]
               )
+            }
+          }
+          stage('Build docker image'){
+            steps{
+              sh 'docker build -t nagadurga8/mydockerhub8:$BUILD_NUMBER .'
             }
           }
             
