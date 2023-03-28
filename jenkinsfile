@@ -52,7 +52,7 @@ pipeline{
           stage('Build docker image'){
             steps{
               script{
-                def dockerImage = docker.build("petclinic")
+                dockerImage = docker.build petclinic + ":$BUILD_NUMBRE"
               }
             }
           }
