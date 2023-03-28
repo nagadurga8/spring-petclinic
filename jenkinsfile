@@ -26,9 +26,7 @@ pipeline{
               withSonarQubeEnv('sonarqube') {
              sh 'mvn clean verify sonar:sonar \
                 -Dsonar.projectKey=petclinic \
-                -Dsonar.login=sqp_9e200dbe6b081c0995427414f0fac96bd132017e'
-              }
-            }
+                -Dsonar.login=squ_0f886848015e7cce4e119435e1448df97b27148b'
           }
           stage('upload jar to nexus'){
             steps{
