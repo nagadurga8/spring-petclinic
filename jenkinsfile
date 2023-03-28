@@ -52,7 +52,7 @@ pipeline{
           stage('Build docker image'){
             steps{
               script{
-                dockerImage = docker.build("petclinic")
+                dockerImage = docker.build("REGISTRY:${env.BUILD_ID}")
               }
             }
           }
