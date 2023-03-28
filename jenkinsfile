@@ -7,7 +7,7 @@ pipeline{
       NEXUS_PORT ='8081'
       NEUXS_LOGIN ='neuxs'
       DOCKERHUB_CREDENTIALS = credentials('docker-token')
-      REGISTRY = '552882621694.dkr.ecr.us-east-1.amazonaws.com/petclinic'
+      REGISTRY = 'petclinic'
      }
     stages {
         stage('clone git') {
