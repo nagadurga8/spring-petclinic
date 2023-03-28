@@ -27,6 +27,8 @@ pipeline{
              sh 'mvn clean verify sonar:sonar \
                 -Dsonar.projectKey=petclinic \
                 -Dsonar.login=squ_0f886848015e7cce4e119435e1448df97b27148b'
+              }
+            }
           }
           stage('upload jar to nexus'){
             steps{
