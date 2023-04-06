@@ -64,7 +64,15 @@ pipeline{
               }
             }
           }
-            
+          stage('Deploy to EKS') {
+            steps {
+                script {
+                    withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'kube', namespace: '', restrictKubeConfigAccess: false, serverUrl: '') {
+                        sh "kubectl apply -f petclinic-k8s.yaml"
+                    }
+                }
+            }              
+          }  
           
     }
 }
